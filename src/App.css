@@ -6,7 +6,45 @@ App {
   margin: 20px auto;
 }
 
-input {
-  padding: 10px;
+/* Container */
+.container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 24px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  background-color: #272757;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Errors */
+.error {
+  color: red;
+  font-size: 14px;
 }

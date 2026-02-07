@@ -1,7 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "../App.css"
+import { useNavigate } from "react-router-dom";
+
+import "../App.css";
+import "./Login.css";
 
 function Login() {
     const {
@@ -12,43 +15,57 @@ function Login() {
 
     const onSubmit = (data) => {
         const userData = JSON.parse(localStorage.getItem(data.email));
-        if (userData) {
-            if (userData.password === data.password) {
-                console.log(userData.name + "You are successfully logged in!");
-            } else {
-                console.log("Email or Password is not matching with our record");
-            }
+
+        if (userData && userData.password === data.password) {
+            console.log(userData.name + " You are successfully logged in!");
+            navigate("/home");
         } else {
             console.log("Email or Password is not matching with our record");
         }
     };
 
-    return (
-        <>
-            <h2>Login Form</h2>
+    const navigate = useNavigate();
 
-            <form className="App" onSubmit={handleSubmit(onSubmit)}>
+  return (
+    <>
+        <h2 style={{ textAlign: "center" }}>Login</h2>
+        
+        <div className="container">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <input
                     type="email"
                     {...register("email", { required: true })}
                     placeholder="Email"
                 />
-                {errors.email && <span style={{ color: "red" }}>*Email* is mandatory</span>}
+                {errors.email && <span className="error">Email is required</span>}
 
                 <input
                     type="password"
                     {...register("password", { required: true })}
                     placeholder="Password"
                 />
-                {errors.password && <span style={{ color: "red" }}>*Password* is mandatory</span>}
+                {errors.password && (
+                    <span className="error">Password is required</span>
+                )}
 
-                <input type="submit" style={{ backgroundColor: "#a1eafb" }} />
+                <button type="submit">Login</button>
+
+                <div className="remember">
+                    <input type="checkbox" {...register("remember")} />
+                    <label>Remember me</label>
+                </div>
             </form>
-            <p>
-                <Link to="/register">Register</Link>
+
+            <p style={{ marginTop: "16px", textAlign: "center" }}>
+                <Link to="/register">Create an account</Link>
             </p>
-        </>
-    );
+
+            <span className="psw">
+                Forgot <a href="#">password?</a>
+            </span>
+        </div>
+    </>
+  );
 }
 
 export default Login;

@@ -1,0 +1,14 @@
+/* Remember + forgot */
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+  
+.psw {
+    display: block;
+    margin-top: 12px;
+    text-align: right;
+}
+  
