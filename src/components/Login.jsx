@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 import "../App.css";
 import "./Login.css";
 
@@ -26,6 +26,8 @@ function Login() {
 
     const navigate = useNavigate();
 
+    const [showPassword, setShowPassword] = useState(false);
+
   return (
     <>
         <h2 style={{ textAlign: "center" }}>Login</h2>
@@ -40,10 +42,19 @@ function Login() {
                 {errors.email && <span className="error">Email is required</span>}
 
                 <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     {...register("password", { required: true })}
                     placeholder="Password"
                 />
+
+                <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="show-password-btn"
+                >
+                    {showPassword ? "Hide" : "Show"}
+                </button>
+
                 {errors.password && (
                     <span className="error">Password is required</span>
                 )}
